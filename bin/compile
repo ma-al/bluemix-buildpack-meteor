@@ -46,8 +46,23 @@ export PATH=$PATH:$COMPILE_BIN_DIR
 # Install Meteor
 #
 status "Installing Meteor"
-curl -sS https://install.meteor.com/ | sh
+LOCAL_VER=$(meteor --version)
+LOCAL_VER="${LOCAL_VER/Meteor /}"
+
+INSTALL_VER=$(curl -sS https://install.meteor.com/ | grep "RELEASE=")
+INSTALL_VER="${INSTALL_VER/RELEASE=\"/}"
+INSTALL_VER="${INSTALL_VER/\"/}"
+
+if [[ "$LOCAL_VER" == "$INSTALL_VER" ]];then
+   echo "Local version is up to date ($LOCAL_VER == $INSTALL_VER)"
+   echo "Skipping reinstall of Meteor"
+else
+   echo "Local version is old. Updating..."
+   curl -sS https://install.meteor.com/ | sh
+fi
+
 export PATH=$PATH:$HOME"/.meteor"
+
 
 #
 # Build Meteor application
