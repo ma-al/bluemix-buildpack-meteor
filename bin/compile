@@ -47,7 +47,9 @@ export PATH=$PATH:$COMPILE_BIN_DIR
 #
 status "Installing Meteor"
 METEOR_BIN=$(which meteor)
-LOCAL_VER=$($METEOR_BIN --version)
+VERSION_CHECK_CMD="$METEOR_BIN --version"
+echo $VERSION_CHECK_CMD
+LOCAL_VER=`$VERSION_CHECK_CMD`
 LOCAL_VER="${LOCAL_VER/Meteor /}"
 
 INSTALL_VER=$(curl -sS https://install.meteor.com/ | grep "RELEASE=")
