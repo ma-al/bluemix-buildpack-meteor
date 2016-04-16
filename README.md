@@ -2,7 +2,7 @@
 
 ## Supported version
 
-This buildpack is dedicated for use with Meteor 1.0+.
+This buildpack is dedicated for use with Meteor 1.3+
 
 ## Usage
 
@@ -20,15 +20,15 @@ To run your new app:
 
 * Create Mongodb service in Bluemix dashboad. The service id will be use in the next step. 
 
-* Create manifest.yml and put it under the testmeteor folder.
-Here is the sample yml.
+* Create `manifest.yml` and put it in the `testmeteor` folder.
+Here is a sample yml.
 ```
 ---
 applications:
 - memory: 1GB
   domain: mybluemix.net
   path: .
-  buildpack: https://github.com/bancha001/bluemix-buildpack-meteor
+  buildpack: https://github.com/ilfrich/bluemix-buildpack-meteor
   host: testmeteor
   name: testmeteor
   disk: 512M
@@ -36,13 +36,13 @@ applications:
     - MongoLab-4d
   instances: 1
 ```
-* Create .cfignore to exclude the path 'local' to be uploaded
+* Create `.cfignore` to exclude the path `local` (contains the compiled Meteor application) to be uploaded
 ```
 .meteor/local
 ```
-* In testmeteor/.meteor folder, open the platforms file then remove the ios and android entries (if there exist)
+* In `testmeteor/.meteor` folder, open the platforms file then remove the ios and android entries (if there exist)
 
-* Under testmeter, Run 
+* Under `testmeteor`, execute the following command:
 ```
 cf push
 
