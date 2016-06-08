@@ -35,7 +35,7 @@ source $BUILDPACK_DIR"/bin/common.sh"
 #
 status "Installing Node"
 #NODE_VERSION=$(curl -sS --get https://semver.io/node/resolve)
-NODE_URL="http://nodejs.org/dist/v0.10.41/node-v0.10.41-linux-x64.tar.gz"
+NODE_URL="http://nodejs.org/dist/v0.10.45/node-v0.10.45-linux-x64.tar.gz"
 curl -sS $NODE_URL -o - | tar -zxf - -C $COMPILE_DIR --strip 1
 export npm_config_prefix=$COMPILE_DIR
 export CPATH=$CPATH:$COMPILE_DIR"/include"
@@ -46,9 +46,8 @@ export PATH=$PATH:$COMPILE_BIN_DIR
 # Install Meteor
 #
 status "Installing Meteor"
-export PATH=$PATH:$HOME"/.meteor"
 curl -sS https://install.meteor.com/ | sh
-#export PATH=$PATH:$HOME"/.meteor"
+export PATH=$PATH:$HOME"/.meteor"
 
 #
 # Build Meteor application
